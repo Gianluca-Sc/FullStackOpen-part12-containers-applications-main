@@ -1,4 +1,16 @@
 # The first FROM is now a stage called build-stage
+FROM node:20 AS test-stage 
+
+ENV VITE_BACKEND_URL="http://localhost:3000/"
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN npm ci
+
+RUN npm run test
+
 
 FROM node:20 AS build-stage 
 
@@ -6,7 +18,7 @@ ENV VITE_BACKEND_URL="http://localhost:3000/"
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY --from=test-stage /usr/src/app/ .
 
 RUN npm ci
 

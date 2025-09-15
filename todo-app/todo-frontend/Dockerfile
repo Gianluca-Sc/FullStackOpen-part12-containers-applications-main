@@ -1,7 +1,7 @@
 # The first FROM is now a stage called build-stage
 FROM node:20 AS test-stage 
 
-ENV VITE_BACKEND_URL="http://localhost:3000/"
+
 
 WORKDIR /usr/src/app
 
@@ -14,7 +14,6 @@ RUN npm run test
 
 FROM node:20 AS build-stage 
 
-ENV VITE_BACKEND_URL="http://localhost:3000/"
 
 WORKDIR /usr/src/app
 

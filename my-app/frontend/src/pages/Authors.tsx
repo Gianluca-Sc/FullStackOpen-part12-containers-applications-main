@@ -1,4 +1,3 @@
-import React from "react";
 import useAuthors from "../hooks/useAuthors.tsx";
 import Author from "../components/Author.tsx";
 

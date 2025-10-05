@@ -1,6 +1,5 @@
-import React from "react";
 import useUser from "../hooks/useUser.ts";
-import { useAuthContext } from "../contexts/AuthContext.tsx";
+
 import { Link, useParams } from "react-router";
 import {
   BookmarkMinus,
@@ -11,11 +10,10 @@ import {
   User,
 } from "lucide-react";
 import { useReadingsContext } from "../contexts/ReadingsContext.tsx";
-import type { ReadingBlog } from "../types.ts";
 
 const SingleUser = () => {
   const { id } = useParams();
-  const { user, loading, error, refetchUser } = useUser(id || "");
+  const { user, loading, error } = useUser(id || "");
   const { isInReadings, removeFromReadings, addToReadings } =
     useReadingsContext();
 

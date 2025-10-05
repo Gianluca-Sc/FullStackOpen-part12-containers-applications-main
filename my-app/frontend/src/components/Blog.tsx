@@ -1,14 +1,6 @@
 import { Link } from "react-router";
 import { type BlogWithUser } from "../types.ts";
-import {
-  BookmarkMinus,
-  BookmarkPlus,
-  Calendar,
-  ExternalLink,
-  Heart,
-  User,
-  X,
-} from "lucide-react";
+import { Calendar, ExternalLink, Heart, User, X } from "lucide-react";
 import { useAuthContext } from "../contexts/AuthContext.tsx";
 import { useState } from "react";
 import { useReadingsContext } from "../contexts/ReadingsContext.tsx";

@@ -1,8 +1,8 @@
-import { useActionState, useState } from "react";
-import type { Blog } from "../types.ts";
+import { useState } from "react";
+
 import blogsService from "../services/blogs.ts";
 import { AxiosError } from "axios";
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 const CreateBlog = () => {
   const [loading, setLoading] = useState(false);

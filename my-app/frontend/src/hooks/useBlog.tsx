@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import blogsService from "../services/blogs.ts";
-import type { Blog, BlogWithUser } from "../types.ts";
+import type { BlogWithUser } from "../types.ts";
 
 const useBlog = (id: string | undefined) => {
   const [loading, setLoading] = useState(false);

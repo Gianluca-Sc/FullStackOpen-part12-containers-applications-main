@@ -1,4 +1,3 @@
-import type { NewUser, User, UserDetails } from "../types.ts";
 import apiClient from "../util/axios.ts";
 
 const BASE_URL = "/api/readinglists";

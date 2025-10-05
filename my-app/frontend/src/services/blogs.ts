@@ -12,6 +12,7 @@ const getAll = async (search: string | null): Promise<BlogWithUser[]> => {
   const request = await apiClient.get(BASE_URL, {
     params,
   });
+  console.log(request);
 
   return request.data;
 };

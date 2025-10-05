@@ -22,7 +22,7 @@ export const ReadingsProvider = ({
 }) => {
   const { user } = useAuthContext();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [_error, setError] = useState<Error | null>(null);
   const [readings, setReadings] = useState<Reading>({});
 
   const fetchReadings = async () => {

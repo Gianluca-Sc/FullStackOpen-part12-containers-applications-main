@@ -6,7 +6,7 @@ import Blog from "../components/Blog.tsx";
 const SingleBlog = () => {
   const { id } = useParams();
 
-  const { loading, error, blog, setBlog, refetchBlog } = useBlog(id);
+  const { loading, error, blog, refetchBlog } = useBlog(id);
   const navigate = useNavigate();
 
   const updateBlog = async (id: string, likes: number) => {

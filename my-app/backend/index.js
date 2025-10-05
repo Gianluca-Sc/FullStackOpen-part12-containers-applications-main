@@ -1,0 +1,33 @@
+import express from "express";
+import blogsRouter from "./controllers/blogs.js";
+import usersRouter from "./controllers/users.js";
+import loginRouter from "./controllers/login.js";
+import logoutRouter from "./controllers/logout.js";
+import authorsRouter from "./controllers/authors.js";
+import readingListsRouter from "./controllers/readingLists.js";
+import { connectToDatabase } from "./util/db.js";
+import { PORT } from "./util/config.js";
+import { errorHandler, unknownEndpoint } from "./util/middleware.js";
+
+const app = express();
+
+app.use(express.json());
+
+app.use("/blogs", blogsRouter);
+app.use("/users", usersRouter);
+app.use("/login", loginRouter);
+app.use("/logout", logoutRouter);
+app.use("/authors", authorsRouter);
+app.use("/readinglists", readingListsRouter);
+
+app.use(unknownEndpoint);
+app.use(errorHandler);
+
+const start = async () => {
+  await connectToDatabase();
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+};
+
+start();

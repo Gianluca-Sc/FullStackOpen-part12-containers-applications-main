@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: blogs
+    volumes:
+      - ./backend/postgres_data:/var/lib/postgresql
+
+  server:
+    build:
+      context: ./backend # The context will pick this directory as the "build context"
+      dockerfile: dev.Dockerfile # This will simply tell which dockerfile to read
+    volumes:
+      - ./backend/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/blogs
+      - SECRET=sdjjds@sd£$(Dg)
+    container_name: blog-backend-dev # This will name the container todo-frontend-dev
+    depends_on:
+      - db
+
+  app:
+    image: blog-frontend-dev
+    build:
+      context: ./frontend # The context will pick this directory as the "build context"
+      dockerfile: dev.Dockerfile # This will simply tell which dockerfile to read
+    volumes:
+      - ./frontend/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+
+    container_name: blog-frontend-dev # This will name the container todo-frontend-dev
+    depends_on:
+      - server
+
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on:
+      - app
+      - server # wait for the frontend container to be started
